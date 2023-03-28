@@ -13,4 +13,6 @@ ENV HOST redis-10924.c299.asia-northeast1-1.gce.cloud.redislabs.com
 ENV PASSWORD VXmUlR47Ui2uCSRhgtcXhYBjHGL7HRB7
 ENV REDISPORT 10924
 
+EXPOSE 8080
+
 ENTRYPOINT ["python", "/chatbot.py"]
