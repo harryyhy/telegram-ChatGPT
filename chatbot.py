@@ -1,6 +1,6 @@
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
-import configparser
+# import configparser
 import logging
 import redis
 import os
@@ -14,15 +14,21 @@ def main():
     # updater = Updater(token=(config['TELEGRAM']['ACCESS_TOKEN']), use_context=True)
     # dispatcher = updater.dispatcher
 
-    updater = Updater(token=(os.environ['ACCESS_TOKEN']), use_context=True)
+    # updater = Updater(token=(os.environ['ACCESS_TOKEN']), use_context=True)
+    updater = Updater(token="6272770771:AAErGQoJw6Yuw2HVGMH6Tp_KsTZiLHE8BzY", use_context=True)
     dispatcher = updater.dispatcher
 
     global redis1
     # redis1 = redis.Redis(host=(config['REDIS']['HOST']), 
     #                     password=(config['REDIS']['PASSWORD']), 
     #                     port=(config['REDIS']['REDISPORT']))
-    redis1 = redis.Redis(host=(os.environ['HOST']), password=
-                            (os.environ['PASSWORD']), port=(os.environ['REDISPORT']))
+
+    # redis1 = redis.Redis(host=(os.environ['HOST']), password=
+    #                         (os.environ['PASSWORD']), port=(os.environ['REDISPORT']), ssl=True)
+
+    redis1 = redis.Redis(host="chatbotchatgpt.redis.cache.windows.net", 
+                        password="fMxVXGRWg7Z45RXbrKAbypy2ECgJSbAQ0AzCaCzyPNE=", 
+                        port=6380, ssl=True)
                         
     # You can set this logging module, so you will know when and why things do not work as expected
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.INFO)
