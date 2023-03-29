@@ -4,3 +4,4 @@ configparser
 redis
 # mysql-connector-python
 openai
+json

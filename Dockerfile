@@ -2,7 +2,6 @@ FROM python
 
 COPY chatbot.py /
 COPY requirements.txt /
-COPY DigiCertGlobalRootG2.crt.pem /
 
 RUN pip install pip update
 RUN pip install -r requirements.txt
