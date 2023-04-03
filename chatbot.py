@@ -48,7 +48,7 @@ def main():
 # normal chat
 def chat(update, context):
     # log
-    # logging.info("Update: " + str(update))
+    logging.info("Update: " + str(str(update['message'])))
 
     content = update['message']['text'] # user input
     ms = [] # all the message, may includes chats before
@@ -75,6 +75,7 @@ def chat(update, context):
 
     # add help info
     reply_message += "\n\n/help to show tips"
+
     context.bot.send_message(chat_id=update.effective_chat.id, text= reply_message)
 
 def help(update: Update, context: CallbackContext) -> None:
