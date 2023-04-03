@@ -74,7 +74,7 @@ def chat(update, context):
     reply_message = rsp["choices"][0]["message"]["content"] 
 
     # add help info
-    reply_text += "\n\n/help to show tips"
+    reply_message += "\n\n/help to show tips"
     context.bot.send_message(chat_id=update.effective_chat.id, text= reply_message)
 
 def help(update: Update, context: CallbackContext) -> None:
