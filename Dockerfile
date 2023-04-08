@@ -1,7 +1,8 @@
 FROM python
 
-COPY chatbot.py /
-COPY requirements.txt /
+COPY chatbot.py ./
+COPY requirements.txt ./
+COPY openai ./openai
 
 RUN pip install pip update
 RUN pip install -r requirements.txt
