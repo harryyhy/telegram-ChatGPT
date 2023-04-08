@@ -4,6 +4,10 @@ import configparser
 import logging
 import redis
 import os
+
+import sys
+sys.path.append('/')
+
 import openai
 import json
 
