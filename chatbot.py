@@ -5,10 +5,9 @@ import logging
 import redis
 import os
 
-import sys
-sys.path.append('/')
-
 import openai
+TIMEOUT_SECS = 15
+
 import json
 
 global redis1
@@ -40,6 +39,7 @@ def main():
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.INFO)
 
     # register dispatchers to handle message
+    dispatcher.add_error_handler(error)    # error handler
     dispatcher.add_handler(MessageHandler(Filters.text & (~Filters.command), chat))     # normal chat
     dispatcher.add_handler(CommandHandler("newchat", newchat))    # to create a new chat
     dispatcher.add_handler(CommandHandler("history", history))    # show all the chats before
