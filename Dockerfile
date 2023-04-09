@@ -1,4 +1,4 @@
-FROM python
+FROM python:3.7
 
 COPY chatbot.py /
 COPY requirements.txt /
