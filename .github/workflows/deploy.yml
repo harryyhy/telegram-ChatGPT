@@ -1,32 +1,5 @@
-# name: Linux Container Node Workflow
-
-# on: [push]
-
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#     - uses: actions/checkout@v2
-
-#     - uses: azure/docker-login@v1
-#       with:
-#         login-server: chatbotchatgpt.azurecr.io
-#         username: ${{ secrets.REGISTRY_USERNAME }}
-#         password: ${{ secrets.REGISTRY_PASSWORD }}
-
-#     - run: |
-#         docker build . -t chatbotchatgpt.azurecr.io/bot:${{ github.sha }}
-#         docker push chatbotchatgpt.azurecr.io/bot:${{ github.sha }}     
-
-#     - uses: azure/webapps-deploy@v2
-#       with:
-#         app-name: 'chatbot-chatgpt'
-#         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-#         images: 'chatbotchatgpt.azurecr.io/bot:${{ github.sha }}'
-
 on: [push]
-name: Linux_Container_Workflow
+name: Build and Deploy to Azure
 
 jobs:
     build-and-deploy:
@@ -61,4 +34,6 @@ jobs:
             registry-username: ${{ secrets.REGISTRY_USERNAME }}
             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
             name: chat-bot
+            secure-environment-variables: ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN }} HOST=${{ secrets.HOST }} PASSWORD=${{ secrets.PASSWORD }} REDISPORT=${{ secrets.REDISPORT }}
             location: 'east asia'
+            
