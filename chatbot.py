@@ -10,7 +10,7 @@ import openai
 import json
 
 global redis1
-openai.api_key = "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"
+openai.api_key = os.environ["OPENAI_KEY"]
 
 def main():
 # Load your token and create an Updater for your Bot

@@ -34,6 +34,6 @@ jobs:
             registry-username: ${{ secrets.REGISTRY_USERNAME }}
             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
             name: chat-bot
-            secure-environment-variables: ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN }} HOST=${{ secrets.HOST }} PASSWORD=${{ secrets.PASSWORD }} REDISPORT=${{ secrets.REDISPORT }}
+            secure-environment-variables: ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN }} HOST=${{ secrets.HOST }} PASSWORD=${{ secrets.PASSWORD }} REDISPORT=${{ secrets.REDISPORT }} OPENAI_KEY=${{ secrets.OPENAI_KEY }}
             location: 'east asia'
             
