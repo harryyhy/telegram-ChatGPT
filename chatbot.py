@@ -6,7 +6,6 @@ import redis
 import os
 
 import openai
-TIMEOUT_SECS = 15
 
 import json
 
@@ -22,7 +21,7 @@ def main():
 
     updater = Updater(token=(os.environ['ACCESS_TOKEN']), use_context=True)
     # updater = Updater(token="6272770771:AAErGQoJw6Yuw2HVGMH6Tp_KsTZiLHE8BzY", use_context=True)
-    dispatcher = updater.dispatcher
+    # dispatcher = updater.dispatcher
 
     global redis1
     # redis1 = redis.Redis(host=(config['REDIS']['HOST']), 
