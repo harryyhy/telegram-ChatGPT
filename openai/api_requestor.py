@@ -31,7 +31,7 @@ from openai import error, util, version
 from openai.openai_response import OpenAIResponse
 from openai.util import ApiType
 
-TIMEOUT_SECS = 30
+TIMEOUT_SECS = 20
 MAX_CONNECTION_RETRIES = 2
 
 # Has one attribute per thread, 'session'.
