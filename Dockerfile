@@ -7,12 +7,4 @@ COPY openai /openai
 RUN pip install pip update
 RUN pip install -r requirements.txt
 
-# telegram
-# ENV ACCESS_TOKEN ***
-
-# Azure redis
-# ENV HOST ***
-# ENV PASSWORD ***
-# ENV REDISPORT ***
-
 ENTRYPOINT ["python", "/chatbot.py"]
