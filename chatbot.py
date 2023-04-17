@@ -57,6 +57,7 @@ def chat(update, context):
     url = "https://api.openai.com/v1/chat/completions"
     # ChatGPT API的访问密钥
     api_key = os.environ["OPENAI_KEY"]
+    
     # Post parameters
     parameters = {
                     "model": "gpt-3.5-turbo",   #gpt-3.5-turbo
@@ -74,7 +75,7 @@ def chat(update, context):
     # get response
     if response.status_code == 200:
         data = response.json()
-        text = data["choices"][0]["message"]
+        text = data["choices"][0]["message"]["content"]
         # include the latest response and set it into redis
         ms.append({"role": "assistant", "content": text})
         redis1.set(key, json.dumps(ms))
