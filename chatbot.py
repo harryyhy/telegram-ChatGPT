@@ -3,12 +3,11 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Callb
 import logging
 import redis
 import os
-import openai
 import json
+import requests
 
 global redis1
 
-openai.api_key = os.environ["OPENAI_KEY"]
 
 def main():
 
@@ -55,22 +54,42 @@ def chat(update, context):
     ms.append({"role": "user", "content": content})
 
     # invoke ChatGPT
-    rsp = openai.ChatCompletion.create(
-        model = "gpt-3.5-turbo",
-        messages = ms
-    )
+    url = "https://api.openai.com/v1/chat/completions"
+    # ChatGPT API的访问密钥
+    api_key = os.environ["OPENAI_KEY"]
+    # Post parameters
+    parameters = {
+                    "model": "gpt-3.5-turbo",   #gpt-3.5-turbo
+                    "messages": ms              # [{"role": "user", "content": context}]
+                }
 
-    # include the latest response and set it into redis
-    ms.append({"role": "assistant", "content": rsp["choices"][0]["message"]["content"]})
-    redis1.set(key, json.dumps(ms))
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {api_key}"
+    }
 
-    # reply to user
-    reply_message = rsp["choices"][0]["message"]["content"] 
+    # send request
+    response = requests.post(url, headers=headers, json=parameters)
 
-    # add help info
-    reply_message += "\n\n/help to show tips"
+    # get response
+    if response.status_code == 200:
+        data = response.json()
+        text = data["choices"][0]["message"]
+        # include the latest response and set it into redis
+        ms.append({"role": "assistant", "content": text})
+        redis1.set(key, json.dumps(ms))
 
-    context.bot.send_message(chat_id=update.effective_chat.id, text= reply_message)
+        # reply to user
+        reply_message = text + "\n\n/help to show tips"
+
+        context.bot.send_message(chat_id=update.effective_chat.id, text= reply_message)
+
+    else:
+        print(response)
+        reply_message = "Sorry, something went wrong." + str(response)
+        context.bot.send_message(chat_id=update.effective_chat.id, text= reply_message)
+        # return "Sorry, something went wrong."
+    
 
 def help(update: Update, context: CallbackContext) -> None:
     reply = """

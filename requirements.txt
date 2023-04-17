@@ -2,6 +2,4 @@ telegram
 python-telegram-bot==13.7
 configparser
 redis
-# openai
-requests==2.20  # to get the patch for CVE-2018-18074
-aiohttp  # Needed for async support
+requests==2.28.1
